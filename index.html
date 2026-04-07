@@ -11,6 +11,16 @@
   <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
+  <div class="sky-decor" aria-hidden="true">
+    <span class="decor-cloud cloud-a">☁️</span>
+    <span class="decor-cloud cloud-b">☁️</span>
+    <span class="decor-cloud cloud-c">☁️</span>
+    <span class="decor-star star-a">⭐</span>
+    <span class="decor-star star-b">✨</span>
+    <span class="decor-heart heart-a">💖</span>
+    <span class="decor-heart heart-b">💗</span>
+  </div>
+  <div class="emoji-rain" aria-hidden="true"></div>
   <header class="topbar">
     <div class="container topbar-inner">
       <a class="brand" href="#top" aria-label="Ir al inicio de Concha Arte">
@@ -281,5 +291,27 @@
       </div>
     </section>
   </main>
+  <script>
+    (() => {
+      const rain = document.querySelector(".emoji-rain");
+      if (!rain) return;
+
+      const pool = ["💖", "💗", "✨", "⭐", "💫"];
+      const isMobile = window.matchMedia("(max-width: 780px)").matches;
+      const count = isMobile ? 18 : 34;
+
+      for (let i = 0; i < count; i += 1) {
+        const drop = document.createElement("span");
+        drop.className = "emoji-drop";
+        drop.textContent = pool[Math.floor(Math.random() * pool.length)];
+        drop.style.left = `${Math.random() * 100}%`;
+        drop.style.animationDelay = `${Math.random() * 12}s`;
+        drop.style.animationDuration = `${8 + Math.random() * 10}s`;
+        drop.style.fontSize = `${0.7 + Math.random() * 0.9}rem`;
+        drop.style.opacity = `${0.35 + Math.random() * 0.45}`;
+        rain.appendChild(drop);
+      }
+    })();
+  </script>
 </body>
 </html>
